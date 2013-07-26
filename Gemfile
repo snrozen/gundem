@@ -9,7 +9,7 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 gem "therubyracer"
 gem 'simple_form'
-
+gem "pg", "~> 0.16.0"
 
 
 # Gems used only for assets and not required
@@ -23,7 +23,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-gem "pg", "~> 0.16.0"
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
