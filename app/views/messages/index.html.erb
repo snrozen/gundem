@@ -1,21 +1,21 @@
 <%- model_class = Message -%>
+<% if @messages %>
+	<% @messages.each do |msg| %> 
+	<div class="page-header span9">
+	    <h2><%= msg.try(:name) %> </h2>
+	    <div class="span1 pull-right">  
+	      <%= msg.category.try(:name) %> 
+	    </div>
+	</div>
+	<div class="span9 ">
+	    <%= msg.try(:content) %>
+	</div>
+	<div class="span2 date pull-right">
+	    <%=  msg.try(:created_at).strftime("%d-%m-%Y" ) %>
+	</div>
 
-<% @messages.each do |msg| %> 
-<div class="page-header span9">
-    <h2><%= msg.name %> </h2>
-    <div class="span1 pull-right">  
-      <%= msg.category.try(:name) %> 
-    </div>
-</div>
-<div class="span9 ">
-    <%= msg.content %>
-</div>
-<div class="span2 date pull-right">
-    <%=  msg.created_at.strftime("%d-%m-%Y" ) %>
-</div>
-
+	<% end %>
 <% end %>
-
 
 
 

@@ -47,7 +47,7 @@
               <h3>Başlıklar</h3>
                 <ul class="nav nav-list">
                   <% last_message.each do |c| %>  
-                <li> <%= link_to c.name %> </li>
+                <li> <%= link_to c.try(:name) %> </li>
                 <% end %>
               </ul>
             </div><!--/.well -->
