@@ -11,7 +11,7 @@
 	    <%= msg.try(:content) %>
 	</div>
 	<div class="span2 date pull-right">
-	    <%=  msg.try(:created_at).strftime("%d-%m-%Y" ) %>
+	    <%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %>
 	</div>
 
 	<% end %>
