@@ -3,7 +3,7 @@
 	<% @messages.each do |msg| %> 
 	<div class="page-header span9">
 	    <h2><%= msg.try(:name) %> </h2>
-	    <div class="span1 pull-right">  
+	    <div class="span2 pull-right">  
 	      <%= msg.category.try(:name) %> 
 	    </div>
 	</div>
