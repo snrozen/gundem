@@ -1,0 +1,35 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.message_box {
+height: 200px;
+width: 200px;
+margin-right: auto;
+margin-left: auto;
+border: dashed 0px Red;
+-moz-border-radius: 46px;
+-webkit-border-radius: 46px;
+border-radius: 46px;
+background-color: #F7F0F0;
+-moz-box-shadow: 0px 0px 7px Red;
+-webkit-box-shadow: 0px 0px 7px Red;
+box-shadow: 0px 0px 7px Blue;
+margin-top: 20px;
+padding: 10px;
+}
+.date{
+	padding-top: 10px;
+	color: Red;
+}
+
+
+
+.name{
+   font-weight: bold;
+
+   }
