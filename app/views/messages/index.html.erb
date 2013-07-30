@@ -12,6 +12,7 @@
 	</div>
 	<div class="span2 date pull-right">
 	    <%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %>
+	    <%=  msg.try(:user).try(:name)  %>
 	</div>
 
 	<% end %>

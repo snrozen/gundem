@@ -11,6 +11,7 @@ gem "therubyracer"
 gem 'simple_form'
 gem "pg", "~> 0.16.0"
 
+gem "bcrypt-ruby", :require => "bcrypt"
 
 # Gems used only for assets and not required
 # in production environments by default.
