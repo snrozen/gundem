@@ -1,9 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :last_message
+  	def confirm_logged
+  		unless  session[:user_id]
+  			redirect_to(:controller => 'sessions', :action => 'new')
+  			return false 
+  		else
+  			return true
 
+  		end
+  		
+  	end
 
 	private
+
 
 	def current_user
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]

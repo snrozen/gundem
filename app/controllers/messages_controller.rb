@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
+  before_filter :confirm_logged, :only => [:show, :new, :edit, :create, :update, :destroy]
   def index
     @messages = Message.order('created_at desc').all
 
@@ -12,6 +13,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/1
   # GET /messages/1.json
+  
   def show
     @message = Message.find(params[:id])
 
