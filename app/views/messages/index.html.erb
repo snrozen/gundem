@@ -1,8 +1,14 @@
 <%- model_class = Message -%>
 <% if @messages %>
 	<% @messages.each do |msg| %> 
+
 	<div class="page-header span9">
-	    <h2><%= msg.try(:name) %> </h2>
+	<% if current_user.try(:admin) %>
+	 	<h2><%= link_to msg.name, edit_message_path(@messages) %></h2>
+
+	 <% else %>
+   		<h2><%= msg.try(:name) %> 111</h2>
+    <% end %>
 	    <div class="span2 pull-right">  
 	      <%= msg.category.try(:name) %> 
 	    </div>
@@ -10,10 +16,14 @@
 	<div class="span9 ">
 	    <%= msg.try(:content) %>
 	</div>
+	<div class="span9 alt_cizgi">
+	 Ekleyen Kişi : 
+	<%=  msg.try(:user).try(:name)  %>
+
 	<div class="span2 date pull-right">
 	    <%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %>
-	    <%=  msg.try(:user).try(:name)  %>
-	</div>
+	  </div>
+</div>
 
 	<% end %>
 <% end %>
