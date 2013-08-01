@@ -4,10 +4,10 @@
 
 	<div class="page-header span9">
 	<% if current_user.try(:admin) %>
-	 	<h2><%= link_to msg.name, edit_message_path(@messages) %></h2>
+	 	<h2><%= link_to msg.name, message_path(msg) %></h2>
 
 	 <% else %>
-   		<h2><%= msg.try(:name) %> 111</h2>
+   		<h2><%= msg.try(:name) %></h2>
     <% end %>
 	    <div class="span2 pull-right">  
 	      <%= msg.category.try(:name) %> 
@@ -17,11 +17,10 @@
 	    <%= msg.try(:content) %>
 	</div>
 	<div class="span9 alt_cizgi">
-	 Ekleyen Kişi : 
-	<%=  msg.try(:user).try(:name)  %>
+	 Ekleyen Kişi : <%=  msg.try(:user).try(:name)  %>
 
-	<div class="span2 date pull-right">
-	    <%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %>
+	<div class="span3 date pull-right">
+	  Eklenme Tarihi : <%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %>
 	  </div>
 </div>
 
