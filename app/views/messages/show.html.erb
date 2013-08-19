@@ -2,10 +2,10 @@
 
 <div class="span12">
   <div class="page-header span9">
-    <h2><%= @message.name %></h2>
+    <h2><%= @message.try(:name) %></h2>
   </div>
   <div class="span7 ">
-      <%= @message.content %>
+      <%= @message.try(:content) %>
   </div>
   <div class="span7 alt_cizgi">
   <b> Ekleyen Kişi   : </b> <span class="date"><%= @message.try(:user).try(:name)  %></span>
@@ -21,7 +21,7 @@
 </div>
 <div class="span7 alt_cizgi">
 <% @message.comment.each do |m| %>
-<h5><span class="comment_name"><%= m.try(:user).name %></span> <small> <%= m.created_at %> </small> </h5>
+<h5><span class="comment_name"><%= m.try(:user).name %></span> <small> <%= m.try(:created_at) %> </small> </h5>
 
 <span class="span7"><%= m.try(:content) %></span>
 <span><i class="icon-thumbs-up"></i><%= m.try(:like) %></span>
