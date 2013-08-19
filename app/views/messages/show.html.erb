@@ -1,25 +1,54 @@
 <%- model_class = Message -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+
+<div class="span12">
+  <div class="page-header span9">
+    <h2><%= @message.name %></h2>
+  </div>
+  <div class="span7 ">
+      <%= @message.content %>
+  </div>
+  <div class="span7 alt_cizgi">
+  <b> Ekleyen Kişi   : </b> <span class="date"><%= @message.try(:user).try(:name)  %></span>
+  <b> Kategorisi     : </b> <span class="date"><%= @message.category.try(:name) %></span>
+  <b> Eklenme Tarihi : </b> <span class="date"><%= @message.try(:created_at).strftime("%d-%m-%Y / %H:%M") %></span>
+  
+</div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @message.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @message.content %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
-  <dd><%= @message.category_id %></dd>
-</dl>
+<div class="span12">
+<div class="comment span9">
+<h4>Yorumlar</h4>
+</div>
+<div class="span7 alt_cizgi">
+<% @message.comment.each do |m| %>
+<h5><span class="comment_name"><%= m.try(:user).name %></span> <small> <%= m.created_at %> </small> </h5>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
+<span class="span7"><%= m.try(:content) %></span>
+<span><i class="icon-thumbs-up"></i><%= m.try(:like) %></span>
+<span><i class="icon-thumbs-down"></i><%= m.try(:dislike) %></span>
+<% end %>
+</div>
+</div>
+<div class="span12">
+<%= form_for :message, :url => add_comment_messages_path(@message), :method => :get do |f| %>
+  <div class="span8">
+    <%= text_area_tag :content, params[:content], :class => 'span5', :size => "10x4" %>
+  </div>
+    <%= f.submit "yorum yap", :class => 'btn btn-primary' %>
+<% end %>
+</div>
+
+<div class="form-actions span7">
+      <%= link_to t('.back', :default => t("helpers.links.back")),
               messages_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_message_path(@message), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              message_path(@message),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+    
+<% if current_user %>
+  <% if current_user.admin%>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_message_path(@message), :class => 'btn' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")), message_path(@message), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger' %>          
+  <% end %>
+<% end %>
 </div>
+
+
+

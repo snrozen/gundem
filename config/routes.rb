@@ -1,4 +1,7 @@
 Proje::Application.routes.draw do
+  resources :comments
+
+
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
@@ -8,7 +11,14 @@ Proje::Application.routes.draw do
   resources :sessions
   resources :categories
   get "main/index"
-  resources :messages
+
+  resources :messages do 
+    collection do
+      get "comment/:id", :controller => "messages", :action => "add_comment", :as => "add_comment"
+      put "like/:id", :controller => "messages", :action => "like", :as => "like"
+      post "dislike/:id", :controller => "messages", :action => "dislike", :as => "dislike"
+    end
+  end
 
 
   # The priority is based upon order of creation:

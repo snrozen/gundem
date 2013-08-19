@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :last_message
+  helper_method :current_user
   	def confirm_logged
   		unless  session[:user_id]
   			redirect_to(:controller => 'sessions', :action => 'new')
@@ -17,10 +17,6 @@ class ApplicationController < ActionController::Base
 
 	def current_user
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
-	end
-
-	def last_message
-		@last_message = Message.find(:all, :limit => 5, :order=> 'created_at desc')
 	end
 
 end

@@ -67,19 +67,9 @@
 
     <div class="container">
         <div class="row">
-          <div class="span10">
+          <div class="span12">
             <%= bootstrap_flash %>
             <%= yield %>
-          </div>
-          <div class="span2">
-            <div class="well sidebar-nav">
-              <h3>Başlıklar</h3>
-                <ul class="nav nav-list">
-                  <% last_message.each do |c| %>  
-                <li> <%= link_to c.try(:name) %> </li>
-                <% end %>
-              </ul>
-            </div><!--/.well -->
           </div><!--/span-->
         </div><!--/row-->
 

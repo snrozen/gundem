@@ -1,9 +1,18 @@
+# encoding: utf-8
 class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
-  before_filter :confirm_logged, :only => [:show, :new, :edit, :create, :update, :destroy]
+  before_filter :confirm_logged, :only => [:new, :edit, :create, :update, :destroy]
   def index
-    @messages = Message.order('created_at desc').all
+    if params[:category_id]
+    @messages = Message.where(:category_id => params[:category_id])
+    else
+      @messages = Message.order('created_at desc').all
+    end
+
+    @categories = Category.all
+
+    @last_message = Message.find(:all, :limit => 5, :order=> 'created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +25,7 @@ class MessagesController < ApplicationController
   
   def show
     @message = Message.find(params[:id])
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -84,4 +94,43 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def add_comment
+    @message = Message.find(params[:id])
+    content = params[:content]
+    @comment = Comment.create(:user_id => current_user.id, :content => content, :message_id => @message.id)
+
+    if @message.errors.blank?
+      redirect_to @message
+    else
+      render :show
+    end
+  end
+
+  def like
+    @message = Message.find(params[:id])
+    if @message.like
+    new_like = @message.like + 1
+    @message.update_attributes(:like => new_like)
+    @message.save
+    else
+    new_like = @message.like = 0
+    @message.update_attributes(:like => new_like)
+    @message.save
+    end
+  end
+
+  def dislike
+    dislike
+    @message = Message.find(params[:id])
+    if @message.dislike
+    new_dislike = @message.dislike + 1
+    @message.update_attributes(:dislike => new_dislike)
+    @message.save
+    else
+    new_dislike = @message.dislike = 0
+    @message.update_attributes(:dislike => new_dislike)
+    @message.save
+    end
+  end
+
 end

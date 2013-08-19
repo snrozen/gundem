@@ -1,32 +1,46 @@
 <%- model_class = Message -%>
+<div class="span12">
+<div class="span8">
 <% if @messages %>
 	<% @messages.each do |msg| %> 
 
-	<div class="page-header span9">
-	<% if current_user.try(:admin) %>
-	 	<h2><%= link_to msg.name, message_path(msg) %></h2>
-
-	 <% else %>
-   		<h2><%= msg.try(:name) %></h2>
-    <% end %>
-	    <div class="span2 pull-right">  
-	      <%= msg.category.try(:name) %> 
-	    </div>
+	<div class="page-header span7">
+	 	<h2><%= link_to msg.name, msg %></h2>
 	</div>
-	<div class="span9 ">
+	<div class="span7 ">
 	    <%= msg.try(:content) %>
 	</div>
-	<div class="span9 alt_cizgi">
-	 Ekleyen Kişi : <%=  msg.try(:user).try(:name)  %>
-
-	<div class="span3 date pull-right">
-	  Eklenme Tarihi : <%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %>
-	  </div>
+	<div class="span7 alt_cizgi">
+	<b> Ekleyen Kişi   : </b> <span class="date"><%=  msg.try(:user).try(:name)  %></span>
+	<b> Kategorisi 	   : </b> <span class="date"><%= msg.category.try(:name) %></span>
+	<b> Eklenme Tarihi : </b> <span class="date"><%=  msg.try(:created_at).strftime("%d-%m-%Y / %H:%M") %></span>
+	<b> Yorum Sayısı   : </b> <span class="date"></span>
+	
 </div>
 
 	<% end %>
 <% end %>
-
+</div>
+<div class="span3">
+           <div class="well sidebar-nav">
+              <h3>Kategoriler</h3>
+                <ul class="nav nav-list">
+                  <% @categories.each do |c| %>  
+                <li> <%= link_to c.try(:name), messages_path(:category_id => c.id) %> </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="well sidebar-nav">
+              <h3>Başlıklar</h3>
+                <ul class="nav nav-list">
+                  <% @last_message.each do |c| %>  
+                <li> <%= link_to c.try(:name) %> </li>
+                <% end %>
+              </ul>
+            </div>
+           <!--/.well -->
+          </div>
+          </div>
 
 
 
