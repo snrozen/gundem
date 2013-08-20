@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   before_filter :confirm_logged, :only => [:new, :edit, :create, :update, :destroy]
   def index
     if params[:category_id]
-    @messages = Message.where(:category_id => params[:category_id])
+      @messages = Message.where(:category_id => params[:category_id])
     else
       @messages = Message.order('created_at desc').all
     end
