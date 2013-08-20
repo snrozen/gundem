@@ -8,7 +8,10 @@
 	 	<h2><%= link_to msg.name, msg %></h2>
 	</div>
 	<div class="span7 ">
-	    <%= msg.try(:content) %>
+	    <%= truncate msg.try(:content), length: 160  %>
+    <% if msg.try(:content).length > 160 %>
+      <%= link_to "devamını oku", msg, style: 'color:#0040FF;' %>
+    <% end %>
 	</div>
 	<div class="span7 alt_cizgi">
 	<b> Ekleyen Kişi   : </b> <span class="date"><%=  msg.try(:user).try(:name)  %></span>
