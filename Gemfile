@@ -28,7 +28,7 @@ group :development do
   gem "rails-erd"
   gem 'unicorn'
   #gem 'ruby-debug'
-  #gem 'better_errors'
+  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'
 end

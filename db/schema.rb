@@ -23,29 +23,29 @@ ActiveRecord::Schema.define(:version => 20130802093540) do
     t.string   "content"
     t.integer  "message_id"
     t.integer  "user_id"
-    t.integer  "like"
-    t.integer  "dislike"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "like",       :default => 0
+    t.integer  "dislike",    :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "messages", :force => true do |t|
     t.string   "name"
     t.text     "content"
     t.integer  "category_id"
+    t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
+    t.string   "name"
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
+    t.boolean  "admin",         :default => false
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
-    t.string   "name"
-    t.boolean  "admin",         :default => false
   end
 
 end

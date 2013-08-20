@@ -107,30 +107,39 @@ class MessagesController < ApplicationController
   end
 
   def like
-    @message = Message.find(params[:id])
-    if @message.like
-    new_like = @message.like + 1
-    @message.update_attributes(:like => new_like)
-    @message.save
+    @current_message = Message.find(params[:id])
+    #@comment = Comment.where(:message_id => params[:message_id])
+    @mes = @current_message.comment.find(params[:message_id])
+
+    if @mes.like
+    new_like = @mes.like + 1
+    @mes.update_attributes(:like => new_like)
+    @mes.save
     else
-    new_like = @message.like = 0
-    @message.update_attributes(:like => new_like)
-    @message.save
+    new_like = @mes.like = 0
+    @mes.update_attributes(:like => new_like)
+    @mes.save
     end
+
+    redirect_to @current_message
   end
 
   def dislike
-    dislike
-    @message = Message.find(params[:id])
-    if @message.dislike
-    new_dislike = @message.dislike + 1
-    @message.update_attributes(:dislike => new_dislike)
-    @message.save
+    @current_message = Message.find(params[:id])
+    #@comment = Comment.where(:message_id => params[:message_id])
+    @mes = @current_message.comment.find(params[:message_id])
+
+    if @mes.dislike
+    new_dislike = @mes.dislike + 1
+    @mes.update_attributes(:dislike => new_dislike)
+    @mes.save
     else
-    new_dislike = @message.dislike = 0
-    @message.update_attributes(:dislike => new_dislike)
-    @message.save
+    new_dislike = @mes.dislike = 0
+    @mes.update_attributes(:dislike => new_dislike)
+    @mes.save
     end
+
+    redirect_to @current_message
   end
 
 end

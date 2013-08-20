@@ -2,14 +2,14 @@
 
 <div class="span12">
   <div class="page-header span9">
-    <h2><%= @message.name %></h2>
+    <h2><%= @message.try(:name) %></h2>
   </div>
   <div class="span7 ">
-      <%= @message.content %>
+      <%= @message.try(:content) %>
   </div>
   <div class="span7 alt_cizgi">
   <b> Ekleyen Kişi   : </b> <span class="date"><%= @message.try(:user).try(:name)  %></span>
-  <b> Kategorisi     : </b> <span class="date"><%= @message.category.try(:name) %></span>
+  <b> Kategorisi     : </b> <span class="date"><%= @message.try(:category).try(:name) %></span>
   <b> Eklenme Tarihi : </b> <span class="date"><%= @message.try(:created_at).strftime("%d-%m-%Y / %H:%M") %></span>
   
 </div>
@@ -23,9 +23,15 @@
 <% @message.comment.each do |m| %>
 <h5><span class="comment_name"><%= m.try(:user).name %></span> <small> <%= m.created_at %> </small> </h5>
 
-<span class="span7"><%= m.try(:content) %></span>
-<span><i class="icon-thumbs-up"></i><%= m.try(:like) %></span>
-<span><i class="icon-thumbs-down"></i><%= m.try(:dislike) %></span>
+  <span class="span7"><%= m.try(:content) %></span>
+  <%= link_to like_messages_path(@message, m) do %>
+    <span><i class="icon-thumbs-up"></i></span>
+  <% end %>
+  <span><%= m.try(:like) %></span>
+  <%= link_to dislike_messages_path(@message, m) do %>
+    <span><i class="icon-thumbs-down"></i></span>
+  <% end %>
+  <span><%= m.try(:dislike) %></span>
 <% end %>
 </div>
 </div>

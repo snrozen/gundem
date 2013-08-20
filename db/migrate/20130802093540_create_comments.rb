@@ -4,8 +4,8 @@ class CreateComments < ActiveRecord::Migration
       t.string :content
       t.integer :message_id
       t.integer :user_id
-      t.integer :like
-      t.integer :dislike
+      t.integer :like, :default => 0
+      t.integer :dislike, :default => 0
 
       t.timestamps
     end

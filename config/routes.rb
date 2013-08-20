@@ -15,8 +15,8 @@ Proje::Application.routes.draw do
   resources :messages do 
     collection do
       get "comment/:id", :controller => "messages", :action => "add_comment", :as => "add_comment"
-      put "like/:id", :controller => "messages", :action => "like", :as => "like"
-      post "dislike/:id", :controller => "messages", :action => "dislike", :as => "dislike"
+      get "like/:id/comment/:message_id", :controller => "messages", :action => "like", :as => "like"
+      get "dislike/:id/comment/:message_id", :controller => "messages", :action => "dislike", :as => "dislike"
     end
   end
 
